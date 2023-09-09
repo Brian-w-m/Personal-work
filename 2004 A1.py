@@ -11,3 +11,5 @@ def restaurantFinder_aux(d, site_list, chosen_sites, total_earnings):
         return  0
     else:
         return restaurantFinder_aux(d, site_list.pop(), chosen_sites)
+
+        #new add
