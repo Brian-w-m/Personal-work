@@ -30,12 +30,12 @@ def restaurantFinder(d, site_list):
 
 
 
-print(restaurantFinder(1, [50, 10, 12, 65, 40, 95, 100, 12, 20, 30])) #252 [1,4,6,8,10]
-print(restaurantFinder(2, [50, 10, 12, 65, 40, 95, 100, 12, 20, 30])) #245 [1,4,7,10]
-print(restaurantFinder(3, [50, 10, 12, 65, 40, 95, 100, 12, 20, 30])) #175 [1,6,10]
-print(restaurantFinder(7, [50, 10, 12, 65, 40, 95, 100, 12, 20, 30])) #100 [7]
-print(restaurantFinder(0, [50, 10, 12, 65, 40, 95, 100, 12, 20, 30])) #434 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-print(restaurantFinder(7, [1]))
+# print(restaurantFinder(1, [50, 10, 12, 65, 40, 95, 100, 12, 20, 30])) #252 [1,4,6,8,10]
+# print(restaurantFinder(2, [50, 10, 12, 65, 40, 95, 100, 12, 20, 30])) #245 [1,4,7,10]
+# print(restaurantFinder(3, [50, 10, 12, 65, 40, 95, 100, 12, 20, 30])) #175 [1,6,10]
+# print(restaurantFinder(7, [50, 10, 12, 65, 40, 95, 100, 12, 20, 30])) #100 [7]
+# print(restaurantFinder(0, [50, 10, 12, 65, 40, 95, 100, 12, 20, 30])) #434 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# print(restaurantFinder(7, [1]))
 
 class graph:
     def __init__(self, paths, keys):
