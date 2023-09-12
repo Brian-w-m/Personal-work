@@ -39,4 +39,22 @@ def restaurantFinder(d, site_list):
 
 class graph:
     def __init__(self, paths, keys):
-        self.paths = paths
+        self.currentMaxNode = 0
+        for path in paths:
+            self.currentMaxNode = max(path[0], path[1], self.currentMaxNode)
+
+        self.adjacencyList = []
+        for _ in range(self.currentMaxNode + 1):
+            self.adjacencyList.append([])
+
+        for path in paths:
+            self.adjacencyList[path[0]].append([path[1], path[2]])
+
+
+grraph = graph([(0, 1, 4), (1, 2, 2), (2, 3, 3), (3, 4, 1), (1, 5, 2), (5, 6, 5), (6, 3, 2), (6, 4, 3), (1, 7, 4), (7, 8, 2), (8, 7, 2), (7, 3, 2), (8, 0, 11), (4, 3, 1), (4, 8, 10)], [(5, 10), (6, 1), (7, 5), (0, 3), (8, 4)])
+print(grraph.adjacencyList)
+
+# paths = [(0, 1, 4), (1, 2, 2), (2, 3, 3), (3, 4, 1), (1, 5, 2), (5, 6, 5), (6, 3, 2), (6, 4, 3), (1, 7, 4), (7, 8, 2), (8, 7, 2), (7, 3, 2), (8, 0, 11), (4, 3, 1), (4, 8, 10)]
+# keys = [(5, 10), (6, 1), (7, 5), (0, 3), (8, 4)]
+
+# paths = []
