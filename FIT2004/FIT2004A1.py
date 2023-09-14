@@ -37,6 +37,8 @@ def restaurantFinder(d, site_list):
 # print(restaurantFinder(0, [50, 10, 12, 65, 40, 95, 100, 12, 20, 30])) #434 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 # print(restaurantFinder(7, [1]))
 
+import heapq as heap
+
 class graph:
     def __init__(self, paths, keys):
         self.currentMaxNode = 0
@@ -44,17 +46,54 @@ class graph:
             self.currentMaxNode = max(path[0], path[1], self.currentMaxNode)
 
         self.adjacencyList = []
-        for _ in range(self.currentMaxNode + 1):
+        for _ in range(2*(self.currentMaxNode + 1)):
             self.adjacencyList.append([])
 
         for path in paths:
             self.adjacencyList[path[0]].append([path[1], path[2]])
+            self.adjacencyList[path[0]+self.currentMaxNode+1].append([path[1]+self.currentMaxNode+1, path[2]])
+
+        for key in keys:
+            self.adjacencyList[key[0]].append([key[0]+self.currentMaxNode+1, key[1]])
+
+    def climb(self, start, exits):
+        dist = []
+        prev = []
+        Qu = []
+
+        
+        for _ in range(2*(self.currentMaxNode + 1)):
+            dist.append([])
+            prev.append([])
+
+        dist[start] = 0
+
+        for v in range(2*(self.currentMaxNode + 1)):
+            if v != start:
+                dist[v] = float('inf')
+                prev[v] = None
+
+            heap.heappush(Qu, (v, dist[v]))
+
+        while len(Qu) != 0:
+            u = heap.heappop(Qu)[0]
+            for v in self.adjacencyList[u]:
+                alt = dist[u] + v[u]
+                if alt < dist[v[0]]:
+                    dist[v[0]] = alt
+                    prev[v[0]] = u
+                    Qu[v[0]] = alt
+
+        return dist, prev
+
 
 
 grraph = graph([(0, 1, 4), (1, 2, 2), (2, 3, 3), (3, 4, 1), (1, 5, 2), (5, 6, 5), (6, 3, 2), (6, 4, 3), (1, 7, 4), (7, 8, 2), (8, 7, 2), (7, 3, 2), (8, 0, 11), (4, 3, 1), (4, 8, 10)], [(5, 10), (6, 1), (7, 5), (0, 3), (8, 4)])
 print(grraph.adjacencyList)
+start = 1
+exits = [7, 2, 4]
+grraph.climb(start, exits)
 
 # paths = [(0, 1, 4), (1, 2, 2), (2, 3, 3), (3, 4, 1), (1, 5, 2), (5, 6, 5), (6, 3, 2), (6, 4, 3), (1, 7, 4), (7, 8, 2), (8, 7, 2), (7, 3, 2), (8, 0, 11), (4, 3, 1), (4, 8, 10)]
 # keys = [(5, 10), (6, 1), (7, 5), (0, 3), (8, 4)]
 
-# paths = []
