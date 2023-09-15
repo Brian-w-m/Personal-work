@@ -88,9 +88,18 @@ class graph:
                 fastestTime = times[exit+self.numNodes]
                 fastestExit = exit
 
-        print(predecessor)
-        print(fastestExit+self.numNodes)
-        return fastestTime
+        path = []
+        current = fastestExit+self.numNodes
+        while current != None:
+            if current > self.numNodes:
+                path.append(current-self.numNodes)
+            elif current != path[-1]:
+                path.append(current)
+            
+            current = predecessor[current]
+
+
+        return (fastestTime, path[::-1])
 
 
 
@@ -98,5 +107,5 @@ class graph:
 grraph = graph([(0, 1, 4), (1, 2, 2), (2, 3, 3), (3, 4, 1), (1, 5, 2), (5, 6, 5), (6, 3, 2), (6, 4, 3), (1, 7, 4), (7, 8, 2), (8, 7, 2), (7, 3, 2), (8, 0, 11), (4, 3, 1), (4, 8, 10)], [(5, 10), (6, 1), (7, 5), (0, 3), (8, 4)])
 start = 1
 exits = [7, 2, 4]
-#(9, [1, 7])
+
 print(grraph.climb(start, exits))
