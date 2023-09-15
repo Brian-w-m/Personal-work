@@ -78,8 +78,7 @@ class FloorGraph:
                 if times[u] + weight < times[v]:
                     times[v] = times[u] + weight
                     heap.heappush(queue, [v, times[v]])
-                    temp = v
-                    predecessor[temp] = u
+                    predecessor[v] = u
 
         fastestTime = float('inf')
         fastestExit = None
@@ -101,15 +100,12 @@ class FloorGraph:
             
             current = predecessor[current]
 
-        
         return (fastestTime, path[::-1])
 
-paths = [(0, 1, 5)]
-keys = [(0, 5)]
+paths = [(0, 1, 4), (1, 2, 2), (2, 3, 3), (3, 4, 1), (1, 5, 2), (5, 6, 5), (6, 3, 2), (6, 4, 3), (1, 7, 4), (7, 8, 2), (8, 7, 2), (7, 3, 2), (8, 0, 11), (4, 3, 1), (4, 8, 10)]
+keys = [(5, 10), (6, 1), (7, 5), (0, 3), (8, 4)]
 grraph = FloorGraph(paths, keys)
 start = 1
-exits = [0, 1]
-
-
+exits = [7, 2, 4]
 
 print(grraph.climb(start, exits))
