@@ -41,48 +41,62 @@ import heapq as heap
 
 class graph:
     def __init__(self, paths, keys):
+
         currentMaxNode = 0
         for path in paths:
             currentMaxNode = max(path[0], path[1], currentMaxNode)
-        self.maxNode = currentMaxNode
+        self.numNodes = currentMaxNode + 1 # total number of nodes
 
         self.adjacencyList = []
-        for _ in range(2*(self.maxNode + 1)):
+        for _ in range(2*self.numNodes):
             self.adjacencyList.append([])
 
         for path in paths:
             self.adjacencyList[path[0]].append([path[1], path[2]])
-            self.adjacencyList[path[0]+self.maxNode+1].append([path[1]+self.maxNode+1, path[2]])
+            self.adjacencyList[path[0]+self.numNodes].append([path[1]+self.numNodes, path[2]])
 
         for key in keys:
-            self.adjacencyList[key[0]].append([key[0]+self.maxNode+1, key[1]])
+            self.adjacencyList[key[0]].append([key[0]+self.numNodes, key[1]])
 
     def climb(self, start, exits):
-        dist = []
-
-        for _ in range(2*(self.maxNode + 1)):
-            dist.append(float('inf'))
+        times = []
+        predecessor = []
+        for _ in range(2*self.numNodes):
+            times.append(float('inf'))
+            predecessor.append(None)
             
-        dist[start] = 0
+        times[start] = 0
 
-        queue = [(0,start)]
+        queue = [[start,0]]
 
         while queue:
-            dist_u, u = heap.heappop(queue)
-            if dist_u > dist[u]:
+            u, dist_u = heap.heappop(queue)
+            if dist_u > times[u]:
                 continue
 
             for v, weight in self.adjacencyList[u]:
-                if dist[u] + weight < dist[v]:
-                    dist[v] = dist[u] + weight
-                    heap.heappush(queue, (dist[v], v))
-        return dist
+                if times[u] + weight < times[v]:
+                    times[v] = times[u] + weight
+                    heap.heappush(queue, [v, times[v]])
+                    temp = v
+                    predecessor[temp] = u
+
+        fastestTime = float('inf')
+        fastestExit = None
+        for exit in exits:
+            if times[exit+self.numNodes] < fastestTime:
+                fastestTime = times[exit+self.numNodes]
+                fastestExit = exit
+
+        print(predecessor)
+        print(fastestExit+self.numNodes)
+        return fastestTime
 
 
 
 
 grraph = graph([(0, 1, 4), (1, 2, 2), (2, 3, 3), (3, 4, 1), (1, 5, 2), (5, 6, 5), (6, 3, 2), (6, 4, 3), (1, 7, 4), (7, 8, 2), (8, 7, 2), (7, 3, 2), (8, 0, 11), (4, 3, 1), (4, 8, 10)], [(5, 10), (6, 1), (7, 5), (0, 3), (8, 4)])
-print(grraph.adjacencyList)
 start = 1
 exits = [7, 2, 4]
+#(9, [1, 7])
 print(grraph.climb(start, exits))
