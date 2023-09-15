@@ -39,7 +39,7 @@ def restaurantFinder(d, site_list):
 
 import heapq as heap
 
-class graph:
+class FloorGraph:
     def __init__(self, paths, keys):
 
         currentMaxNode = 0
@@ -88,24 +88,28 @@ class graph:
                 fastestTime = times[exit+self.numNodes]
                 fastestExit = exit
 
+        if fastestExit == None:
+            return None
+
         path = []
         current = fastestExit+self.numNodes
         while current != None:
-            if current > self.numNodes:
+            if current >= self.numNodes:
                 path.append(current-self.numNodes)
-            elif current != path[-1]:
+            elif path == [] or current != path[-1]:
                 path.append(current)
             
             current = predecessor[current]
 
-
+        
         return (fastestTime, path[::-1])
 
-
-
-
-grraph = graph([(0, 1, 4), (1, 2, 2), (2, 3, 3), (3, 4, 1), (1, 5, 2), (5, 6, 5), (6, 3, 2), (6, 4, 3), (1, 7, 4), (7, 8, 2), (8, 7, 2), (7, 3, 2), (8, 0, 11), (4, 3, 1), (4, 8, 10)], [(5, 10), (6, 1), (7, 5), (0, 3), (8, 4)])
+paths = [(0, 1, 5)]
+keys = [(0, 5)]
+grraph = FloorGraph(paths, keys)
 start = 1
-exits = [7, 2, 4]
+exits = [0, 1]
+
+
 
 print(grraph.climb(start, exits))
