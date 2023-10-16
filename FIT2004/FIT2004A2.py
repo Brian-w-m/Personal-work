@@ -22,6 +22,8 @@ class Edge:
         self.flow = 0
     def __str__(self):
         return f"({self.u}, {self.v}, {self.capacity})"
+    def __repr__(self):
+        return self.__str__()
 
 
 def dfs(u, t, bottleneck):
@@ -95,7 +97,5 @@ for edge in edges:
 max_flow_value = max_flow(graph, source, sink)
 print("Maximum Flow:", max_flow_value)
 
-for i in graph:
-    for j in i:
-        print(j.flow, j)
+print(graph)
 
