@@ -819,7 +819,7 @@ def find_chosen_output(cars, expected):
 
 if __name__ == '__main__':
     timer = time.time()
-    Dictionary = load_dictionary("Dictionary.txt")
+    Dictionary = load_dictionary("Dictionary1.txt")
     print(f"\nDictionary Load Time: {round(time.time() - timer, 3)}s")
     timer = time.time()
     myTrie = Trie(Dictionary)

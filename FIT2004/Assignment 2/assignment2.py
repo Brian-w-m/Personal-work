@@ -19,10 +19,6 @@ def load_dictionary(filename):
             aList.append([word,definition,frequency])
 
     return aList
-    
-if __name__ == "__main__":
-    Dictionary = load_dictionary("Dictionary.txt")
-    myTrie = Trie(Dictionary)
 
 ########################################
 
@@ -130,3 +126,9 @@ def allocate(preferences, licences):
 class Trie:
     def __init__(self):
         pass
+
+
+
+if __name__ == "__main__":
+    Dictionary = load_dictionary("Dictionary.txt")
+    myTrie = Trie(Dictionary)
