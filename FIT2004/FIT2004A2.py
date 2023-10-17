@@ -25,13 +25,14 @@ class Edge:
     def __repr__(self):
         return self.__str__()
 
-
+# finds bottleneck for chosen path
 def dfs(u, t, bottleneck):
     if u == t:
         return bottleneck
 
     visited[u] = True
 
+    # all edges originating from u
     for edge in graph[u]:
         v, residual = edge.v, edge.capacity - edge.flow
         if residual > 0 and not visited[v]:
@@ -97,5 +98,14 @@ for edge in edges:
 max_flow_value = max_flow(graph, source, sink)
 print("Maximum Flow:", max_flow_value)
 
-print(graph)
+first_car = []
+second_car = []
+for i in range(1,ppl_num+1):
+    for edge in graph[i]:
+        # For these restrictions, could try > or < since person nodes arent connected to the rightside nodes
+        if edge.flow==1 and edge.v in range(1+ppl_num,1+ppl_num+max_loclen+1,2):
+            first_car.append(edge.u)
+        elif edge.flow==1 and edge.v in range(1+ppl_num+1,1+ppl_num+max_loclen+1+1,2):
+            second_car.append(edge.u)
 
+print(first_car, second_car)
