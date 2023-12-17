@@ -36,15 +36,17 @@
           margin-right: 15px;
         }
 
+        .video-info-grid {
+          display: grid;
+          grid-template-columns: 50px 1fr;
+        }
+
         .channel-picture {
-          display: inline-block;
-          width: 50px;
-          vertical-align: top;
+          background-color: gray;
         }
 
         .video-info {
-          display: inline-block;
-          width: 200px;
+          background-color: gray;
         }
 
         .profile-picture {
@@ -75,11 +77,11 @@
         <div class="thumbnail-row">
           <img class="thumbnail" src="thumbnails/thumbnail-1.webp">
         </div>
-        <div>
+        <div class="video-info-grid">
           <div class="channel-picture">
             <img class="profile-picture" src="channel-pictures/channel-1.jpeg">
           </div>
-          <div class="video-info">
+        <div class="video-info">
           <p class="video-title">
             Talking Tech and AI with Google CEO Sundar Pichai!
           </p>
@@ -96,7 +98,11 @@
 
       <div class="video-preview">
         <img class="thumbnail" src="thumbnails/thumbnail-2.webp">
-        
+        <div class="video-info-grid">
+        <div class="channel-picture">
+          <img class="profile-picture" src="channel-pictures/channel-2.jpeg">
+        </div>
+        <div class="video-info">
         <p class="video-title">
           Try Not To Laugh Challenge #9
         </p>
@@ -106,6 +112,8 @@
         <p class="video-stats">
           19M views &#183; 4 years ago
         </p>
+      </div>
+      </div>
       </div>
 
     </body>
