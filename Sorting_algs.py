@@ -91,7 +91,7 @@ def insertion_sort(lst):
             j -= 1
     return lst
 
-print(insertion_sort([1,5,2,4,8]))
+# print(insertion_sort([1,5,2,4,8]))
 
 
 def reverse_insertion_sort(lst):
@@ -104,5 +104,5 @@ def reverse_insertion_sort(lst):
             j -= 1
     return lst
 
-print(reverse_insertion_sort([1,5,2,4,8]))
+# print(reverse_insertion_sort([1,5,2,4,8]))
 
