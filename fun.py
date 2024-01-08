@@ -128,5 +128,105 @@ def myAtoi(s: str) -> int:
         return 2**31 - 1
     return int(output)
 
+# FOOBAR CHALLENGES
 
-print(myAtoi(" "))
+'''-- Python cases --
+Input:
+solution.solution("The quick brown fox jumps over the lazy dog")
+Output:
+    000001011110110010100010000000111110101001010100100100101000000000110000111010101010010111101110000000110100101010101101000000010110101001101100111100011100000000101010111001100010111010000000011110110010100010000000111000100000101011101111000000100110101010110110
+
+Input:
+solution.solution("code")
+Output:
+    100100101010100110100010
+
+Input:
+solution.solution("Braille")
+Output:
+    000001110000111010100000010100111000111000100010'''
+
+
+def solution_old(s):
+    code_table = {
+        'a': '100000',
+        'b': '110000',
+        'c': '100100',
+        'd': '100110',
+        'e': '100010',
+        'f': '110100',
+        'g': '110110',
+        'h': '110010',
+        'i': '010100',
+        'j': '010110',
+        'k': '101000',
+        'l': '111000',
+        'm': '101100',
+        'n': '101110',
+        'o': '101010',
+        'p': '111100',
+        'q': '111110',
+        'r': '111010',
+        's': '011100',
+        't': '011110',
+        'u': '101001',
+        'v': '111001',
+        'w': '010111',
+        'x': '101101',
+        'y': '101111',
+        'z': '101011',
+        ' ': '000000'
+        }
+    output = ''
+    for char in s:
+        if char.isupper():
+            output += '000001'
+        output += code_table[char.lower()]
+    return output
+
+'''input:solution.solution([4, 17, 50])
+Output:    -1,-1
+
+Input:solution.solution([4, 30, 50])
+Output:    12,1'''
+
+
+from fractions import Fraction
+
+def solution(pegs):
+    """
+    need to use min of first gear (2) (as last gear must be >= 1) to find the corresponding value of last gear
+    then use max of last gear (gap btwn last and second last peg - 1) to find corresponding value of first gear
+    create linear relationship and find when first peg is double of last peg
+    """
+    
+    if len(pegs) == 2:
+        radii = Fraction(2*(pegs[1]-pegs[0])/3).limit_denominator()
+        return [radii._numerator, radii._denominator]
+
+    prev = 2
+    for i in range(1,len(pegs)):
+        prev = pegs[i] - pegs[i-1] - prev
+    min_first = (2,prev)
+    
+    max_radii = pegs[-1] - pegs[-2] - 1
+    prev = max_radii
+    for i in range(-1,-1 * len(pegs),-1):
+        prev = pegs[i] - pegs[i-1] - prev
+    max_last = (prev, max_radii)
+
+    gradient = (max_last[1] - min_first[1])/(max_last[0] - min_first[0])
+    intercept = min_first[1] - gradient * min_first[0]
+
+    first_gear_size = Fraction(intercept/(0.5-gradient)).limit_denominator()
+
+    prev = first_gear_size
+    for i in range(1,len(pegs)):
+        prev = pegs[i] - pegs[i-1] - prev
+        if prev < 1 or prev > pegs[i] - pegs[i-1] -1:
+            return [-1,-1]
+
+    if first_gear_size >= 2:
+        return [first_gear_size._numerator, first_gear_size._denominator]
+    else:
+        return [-1,-1]
