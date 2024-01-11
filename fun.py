@@ -128,6 +128,36 @@ def myAtoi(s: str) -> int:
         return 2**31 - 1
     return int(output)
 
+#3sum closest
+
+def threeSumClosest(nums, target):
+    closest = None
+    dist = float('inf')
+    nums = sorted(nums)
+    for i in range(len(nums)):
+        new_target = target - nums[i]
+        left = i + 1
+        right = len(nums) - 1
+        while left < right:
+            summ = nums[left] + nums[right]
+            if summ < new_target:
+                left += 1
+            elif summ > new_target:
+                right -= 1
+            else:
+                return target
+            if abs((summ + nums[i]) - target) < dist:
+                closest = summ + nums[i]
+                dist = abs((summ + nums[i]) - target)
+    return closest
+
+def letterCombinations(digits):
+    pass
+    
+
+
+
+
 # FOOBAR CHALLENGES
 
 '''-- Python cases --
