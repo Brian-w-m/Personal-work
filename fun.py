@@ -152,7 +152,35 @@ def threeSumClosest(nums, target):
     return closest
 
 def letterCombinations(digits):
-    pass
+    nums = {
+        '2':'abc',
+        '3':'def',
+        '4':'ghi',
+        '5':'jkl',
+        '6':'mno',
+        '7':'pqrs',
+        '8':'tuv',
+        '9':'wxyz'
+    }
+    output = []
+    dfs_phone(nums, 0, digits, '', output)
+    return output
+    
+def dfs_phone(nums, index, digits, cur, output):
+    if len(digits) == 0:
+        return
+    if index == len(digits):
+        output.append(cur)
+        index -=1
+        cur = cur[:-1]
+        return
+    else:
+        cur_chars = nums[digits[index]]
+        for char in cur_chars:
+            dfs_phone(nums, index + 1, digits, cur + char, output)
+    
+
+print(letterCombinations(""))
     
 
 
