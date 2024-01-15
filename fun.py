@@ -180,11 +180,66 @@ def dfs_phone(nums, index, digits, cur, output):
             dfs_phone(nums, index + 1, digits, cur + char, output)
     
 
-print(letterCombinations(""))
-    
+def fourSum(nums, target):
+    nums = sorted(nums)
+    output = [] 
+    target = [target]
+    fourSumAux(nums, target, 4, output)
+    return output
 
 
+def fourSumAux(nums, target, reqSums, output):
+    if reqSums == 2:
+        cur_target = target[0] - sum(target[1:])
+        left = 0
+        right = len(nums)-1
+        while left < right:
+            twoSum = nums[left] + nums[right]
+            if twoSum < cur_target:
+                left += 1
+            elif twoSum > cur_target:
+                right -= 1
+            else:
+                output.append([targ for targ in target[1:]] + [nums[left], nums[right]])
+                left += 1
+                while nums[left] == nums[left-1] and left<right:
+                    left+=1
+        return
+    else:
+        i=0
+        while i < len(nums)-reqSums+1:
+            fourSumAux(nums[i+1:], target + [nums[i]], reqSums-1, output)
+            i+=1
+            while nums[i] == nums[i-1] and i < len(nums)-1:
+                i += 1
 
+#anagram
+def minSteps(s, t):
+    freq_s = {}
+    freq_t = {}
+    for char in s:
+        if char not in freq_s:
+            freq_s[char] = 1
+        else:
+            freq_s[char] +=1
+    for char in t:
+        if char not in freq_t:
+            freq_t[char] = 1
+        else:
+            freq_t[char] +=1
+
+    output = 0
+    for char in freq_t:
+        if char not in freq_s:
+            output += freq_t[char]
+        else:
+            output += abs(freq_t[char] - freq_s[char])
+    for char in freq_s:
+        if char not in freq_t:
+            output += freq_s[char]
+    return output//2
+
+print(minSteps("leetcode", "practice"))
 
 # FOOBAR CHALLENGES
 
