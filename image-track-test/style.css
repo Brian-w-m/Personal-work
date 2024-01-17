@@ -8,7 +8,7 @@ body {
 
 #image-track {
   display: flex;
-  gap: 4vmin;
+  gap: 2vmin;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -21,13 +21,20 @@ body {
   height: 56vmin;
   object-fit: cover;
   object-position: 100% center;
+  transition: 0.5s;
+  padding-top: 7vmin;
+  z-index: 2;
 }
 
-.scroll-text {
-  width: 300px;
-  color: white;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  font-size: 50px;
-  padding-top: 150px;
+.img-text {
+  color: aliceblue;
+  width: 0px;
+  position: relative;
+  transform: translate3d(-10vmin,56vmin,0);
+  z-index: 1;
+}
+
+.num {
+  position: absolute;
+  color: aliceblue;
 }

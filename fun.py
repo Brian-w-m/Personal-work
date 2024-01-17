@@ -239,7 +239,7 @@ def minSteps(s, t):
             output += freq_s[char]
     return output//2
 
-print(minSteps("leetcode", "practice"))
+
 
 # FOOBAR CHALLENGES
 
