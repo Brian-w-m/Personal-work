@@ -240,6 +240,58 @@ def minSteps(s, t):
     return output//2
 
 
+# climbing steps
+def climbStairs(n):
+    def climbStairsAux(n):
+        if n in memo:
+            return memo[n]
+        else:
+            memo[n] = (climbStairsAux(n-1)[0] + climbStairsAux(n-1)[1],climbStairsAux(n-1)[0])
+            return memo[n]
+    memo = {1 : (1,1)}
+    climbStairsAux(n)
+    return memo[n][0]
+
+# reverse k group nodes
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+    def __str__(self) -> str:
+        return f'({self.val}, {self.next})'
+
+def reverseKGroup(head, k):
+    if k == 1:
+        return head
+    prev = None
+    brek=0
+    while head != None:
+        stack = []
+        for _ in range(k-1):
+            if not head.next:
+                brek=1
+                break
+            stack.append(head)
+            head = head.next
+        if brek==1:
+            break
+        end = head.next
+        if not prev:
+            true_head = head
+        if prev:
+            prev.next = head
+        for node in stack[::-1]:
+            head.next = node
+            head = head.next
+        head.next = end
+        prev = head
+        head = end
+    return true_head
+
+head = ListNode(1,ListNode(2))
+print(reverseKGroup(head, 2))
 
 # FOOBAR CHALLENGES
 
