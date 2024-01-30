@@ -291,7 +291,7 @@ def reverseKGroup(head, k):
     return true_head
 
 head = ListNode(1,ListNode(2))
-print(reverseKGroup(head, 2))
+# print(reverseKGroup(head, 2))
 
 # FOOBAR CHALLENGES
 
@@ -395,3 +395,6 @@ def solution(pegs):
         return [first_gear_size._numerator, first_gear_size._denominator]
     else:
         return [-1,-1]
+    
+
+print("hello %d lol" % 9)
